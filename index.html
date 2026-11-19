@@ -1,1 +1,122 @@
-日報準備中
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的 AI 科技日報・2026-11-19</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+  /* 只要改「我的設定」的主色，整頁的重點色就跟著換 */
+  :root {
+    --accent: #b0412e;
+    --paper: #f6f3ec; --card: #ffffff; --ink: #1c1a17; --soft: #5c5850; --faint: #8f8a80;
+    --line: #e3ddd1; --tint: color-mix(in srgb, var(--accent) 9%, var(--card));
+    --serif: "Noto Serif TC", "Songti TC", serif;
+    --sans: "Noto Sans TC", -apple-system, "PingFang TC", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16150f; --card: #211f19; --ink: #f1ede4; --soft: #c2bcb0; --faint: #8b857a;
+      --line: #36322a; --tint: color-mix(in srgb, var(--accent) 18%, var(--card));
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.7; overflow-wrap: anywhere; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* 刊頭 */
+  header.wrap { padding-top: 28px; }
+  .dateline { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--soft); border-bottom: 1px solid var(--ink); padding-bottom: 8px; }
+  header h1 { font-family: var(--serif); font-weight: 900; font-size: clamp(26px, 8vw, 64px); line-height: 1.15; text-align: center; margin: 18px 0 12px; letter-spacing: .04em; }
+  header h1::after { content: ""; display: block; width: 56px; height: 4px; background: var(--accent); margin: 14px auto 0; border-radius: 2px; }
+  .edition { text-align: center; color: var(--soft); font-size: 14px; margin: 0 0 18px; }
+  .edition b { color: var(--accent); }
+
+  /* 分類導覽：手機可以左右滑 */
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(8px); border-top: 3px double var(--ink); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+  nav a { flex: none; font-size: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); white-space: nowrap; }
+  nav a b { margin-left: 6px; color: var(--accent); font-weight: 700; }
+  nav a:hover { border-color: var(--accent); }
+
+  main.wrap { padding-top: 28px; padding-bottom: 40px; }
+  .eyebrow { font-size: 12px; letter-spacing: .2em; color: var(--accent); font-weight: 700; margin: 0 0 6px; }
+
+  /* 今日首選 */
+  .pick { position: relative; background: var(--card); border-radius: 18px; padding: 28px 32px; margin-bottom: 36px; box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(0,0,0,.25); overflow: hidden; }
+  .pick::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--accent); }
+  .pick-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .pick h2 { margin: 0; font-size: 14px; letter-spacing: .2em; color: var(--accent); }
+  .pick-score { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--soft); }
+  .dots { display: inline-flex; gap: 4px; }
+  .dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--accent); }
+  .dots i.on { background: var(--accent); }
+  .pick h3 { font-family: var(--serif); font-weight: 900; font-size: clamp(24px, 3.6vw, 36px); line-height: 1.4; margin: 14px 0 14px; }
+  .pick h3 a:hover { color: var(--accent); }
+  .pick-why { background: var(--tint); border-radius: 12px; padding: 14px 18px; margin: 0 0 16px; font-size: 16px; }
+  .pick-why strong { color: var(--accent); }
+  .pick-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pick-tags span { background: var(--accent); color: #fff; border-radius: 999px; padding: 3px 12px; font-size: 13px; font-weight: 500; }
+  .pick .meta { margin: 14px 0 0; color: var(--faint); font-size: 13px; }
+
+  /* 本週熱詞 */
+  div.hot { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; margin-bottom: 40px; }
+  div.hot h2 { font-family: var(--serif); font-size: 22px; margin: 0; }
+  div.hot > p { margin: 2px 0 14px; color: var(--faint); font-size: 13px; }
+  div.hot ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px 28px; }
+  div.hot li { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  div.hot .word { font-weight: 700; }
+  div.hot .word b { display: inline-block; font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 6px; background: var(--accent); color: #fff; margin-left: 4px; vertical-align: 2px; }
+  div.hot .word b.b-new { background: var(--ink); color: var(--paper); }
+  div.hot .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  div.hot .bar span { display: block; height: 100%; background: var(--faint); border-radius: 3px; }
+  div.hot li.hot .bar span, div.hot li.new .bar span { background: var(--accent); }
+  div.hot .num { font-size: 12px; color: var(--faint); }
+
+  /* 各類別 */
+  section.cat { margin-bottom: 40px; scroll-margin-top: 64px; }
+  section.cat h2 { font-family: var(--serif); font-size: 26px; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: 10px; }
+  section.cat h2 small { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; transition: transform .15s ease, box-shadow .15s ease; }
+  article:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(0,0,0,.35); }
+  article .src { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 6px; font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: .04em; }
+  article .src time { color: var(--faint); font-weight: 400; }
+  article h3 { font-family: var(--serif); font-size: 19px; line-height: 1.5; margin: 0 0 10px; }
+  article h3 a:hover { color: var(--accent); }
+  .short { font-weight: 700; margin: 0 0 6px; }
+  .long { color: var(--soft); font-size: 15px; margin: 0 0 12px; }
+  .kws { margin: auto 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .kw { font-size: 12px; padding: 2px 9px; border-radius: 999px; background: var(--paper); color: var(--soft); border: 1px solid var(--line); }
+  .kw.is-hot { color: var(--accent); border-color: var(--accent); font-weight: 700; }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 0 40px; color: var(--faint); font-size: 13px; text-align: center; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .pick { padding: 22px 20px 22px 24px; border-radius: 14px; }
+    div.hot { padding: 18px; }
+    .grid { grid-template-columns: 1fr; }
+    .dateline span:last-child { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="dateline"><span>2026-11-19・台北時間</span><span>資料期間 2026-11-13 至 2026-11-19 對比 2026-10-23 至 2026-11-12</span></div>
+  <h1>我的 AI 科技日報</h1>
+  <p class="edition">本期 <b>20</b> 則・由 n8n 與 Gemini 自動編輯</p>
+</header>
+<nav aria-label="新聞分類"><div class="wrap"><a href="#cat-1">AI 與軟體<b>4</b></a><a href="#cat-2">晶片與硬體<b>2</b></a><a href="#cat-3">資安<b>5</b></a><a href="#cat-4">雲端與企業 IT<b>1</b></a><a href="#cat-5">產業與市場<b>4</b></a><a href="#cat-6">政策與社會<b>2</b></a><a href="#cat-7">其他<b>2</b></a></div></nav>
+<main class="wrap">
+  <section class="pick" aria-labelledby="pick-title"><div class="pick-heading"><h2 id="pick-title">今日首選</h2><span class="pick-score"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>4 分／滿分 4 分</span></div><h3><a href="https://www.ithome.com.tw/news/180641" target="_blank" rel="noopener noreferrer">Google升級Gemini Tasks，新增AI代打電話、購物付款功能，首度開放免費使用</a></h3><p class="pick-why"><strong>為什麼值得發：</strong>具體提及 6 國開放範圍，且涉及工作任務代理功能。</p><div class="pick-tags"><span>在地／點名</span><span>具體</span><span>跟工作有關</span><span>熱詞</span></div><p class="meta">iThome・AI 與軟體</p></section>
+  <div class="hot"><p class="eyebrow">TRENDING</p><h2>本週熱詞</h2><p>本週出現次數對比前三週平均（Asia/Taipei）</p><ul><li class="hot"><span class="word">輝達 <b>熱</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 8 次・平常每週 0.33 次・6.75 倍</span></li><li class="hot"><span class="word">Google <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 5 次・平常每週 0 次・6 倍</span></li><li class="hot"><span class="word">黃仁勳 <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 4 次・平常每週 0 次・5 倍</span></li><li class="hot"><span class="word">Claude <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 3 次・平常每週 0 次・4 倍</span></li><li class="hot"><span class="word">Gemini <b>熱</b> <b class="b-new">新</b></span><span class="bar"><span style="width:100%"></span></span><span class="num">本週 3 次・平常每週 0 次・4 倍</span></li><li class="hot"><span class="word">Anthropic <b>熱</b></span><span class="bar"><span style="width:94%"></span></span><span class="num">本週 4 次・平常每週 0.33 次・3.75 倍</span></li><li class="new"><span class="word">JINS <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="new"><span class="word">個資外洩 <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="new"><span class="word">當機 <b class="b-new">新</b></span><span class="bar"><span style="width:75%"></span></span><span class="num">本週 2 次・平常每週 0 次・3 倍</span></li><li class="hot"><span class="word">OpenAI <b>熱</b></span><span class="bar"><span style="width:63%"></span></span><span class="num">本週 4 次・平常每週 1 次・2.5 倍</span></li></ul></div>
+  <section class="cat" id="cat-1"><h2>AI 與軟體 <small>4 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 11:20</time></p><h3><a href="https://technews.tw/2026/11/19/ex-openai-researcher-jacob-coxon-says-hell-donate-equity-to-ai-safety/" target="_blank" rel="noopener noreferrer">贊成暫停 AI 開發的前 OpenAI 研究員宣布出售持股，所得捐作 AI 安全用途</a></h3><p class="short">前 OpenAI 研究員出售持股，並將所得捐作 AI 安全用途。</p><p class="long">曾任職於 OpenAI 與 Anthropic 的研究員雅各‧考克森宣布出售持股。他支持暫停 AI 開發，並決定將所得捐贈給 AI 安全領域。</p><p class="kws"><span class="kw is-hot">OpenAI</span><span class="kw is-hot">Anthropic</span><span class="kw">雅各‧考克森</span><span class="kw">AI 安全</span></p></article><article><p class="src">iThome<time>11/19 11:11</time></p><h3><a href="https://www.ithome.com.tw/news/180641" target="_blank" rel="noopener noreferrer">Google升級Gemini Tasks，新增AI代打電話、購物付款功能，首度開放免費使用</a></h3><p class="short">Google 升級 Gemini Tasks，提供 AI 代撥電話與購物等功能。</p><p class="long">Google 推出升級版 Gemini Tasks，新增 AI 代打電話、預約與購物付款功能。該功能率先於美國推出，並首度對 6 國用戶免費開放。</p><p class="kws"><span class="kw is-hot">Google</span><span class="kw">Gemini Tasks</span><span class="kw">AI 代理人</span><span class="kw">免費</span></p></article><article><p class="src">科技新報<time>11/19 11:00</time></p><h3><a href="https://technews.tw/2026/11/19/snapchat-launches-ai-filter-developer-tools/" target="_blank" rel="noopener noreferrer">只要會說話就能做 AR 濾鏡，Snapchat 整合 Claude 等 AI 助理推開發神器</a></h3><p class="short">Snapchat 推出整合 AI 助理的開發工具，透過對話即可製作濾鏡。</p><p class="long">Snapchat 推出「Easy Lens CLI」開發工具，整合 Claude 等 AI 助理。使用者僅需透過自然語言對話，即可快速產出 AR 濾鏡。</p><p class="kws"><span class="kw">Snapchat</span><span class="kw">Easy Lens CLI</span><span class="kw is-hot">Claude</span><span class="kw">AR 濾鏡</span></p></article><article><p class="src">INSIDE<time>11/19 10:39</time></p><h3><a href="https://www.inside.com.tw/article/42949-blender-skills-28-agent-skills-claude-code-codex-3d-modeling-rendering" target="_blank" rel="noopener noreferrer">用自然語言就能做 3D 場景！開源專案 blender-skills 把建模到渲染打包成 28 項代理技能</a></h3><p class="short">開源專案 blender-skills 讓使用者以自然語言完成 3D 建模與渲染。</p><p class="long">GitHub 開源專案 blender-skills 將建模至渲染流程打包為 28 項代理技能。該專案支援自然語言操作，適用於 Blender 5.2 LTS 或更新版本。</p><p class="kws"><span class="kw">blender-skills</span><span class="kw">Blender</span><span class="kw">GitHub</span><span class="kw">開源專案</span></p></article></div></section><section class="cat" id="cat-2"><h2>晶片與硬體 <small>2 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 11:50</time></p><h3><a href="https://technews.tw/2026/11/19/google-smart-glasses-pre-order-frenzy/" target="_blank" rel="noopener noreferrer">Google 聯手三星推 AI 智慧眼鏡遭秒殺，Gemini 語音助理成大賣點</a></h3><p class="short">Google 與三星聯手推出 AI 智慧眼鏡，首波銷售熱烈。</p><p class="long">Google 重返智慧眼鏡市場，與三星合作推出的產品反應熱烈。該裝置搭載 Gemini 語音助理，成為吸引消費者的主要賣點。</p><p class="kws"><span class="kw is-hot">Google</span><span class="kw">三星</span><span class="kw">AI 智慧眼鏡</span><span class="kw is-hot">Gemini</span></p></article><article><p class="src">INSIDE<time>11/19 11:36</time></p><h3><a href="https://www.inside.com.tw/article/42957-openai-amd-ai-chip-design-gpu-ppa-improvement" target="_blank" rel="noopener noreferrer">OpenAI 攜手 AMD，用 AI 改良旗艦 GPU 電路設計</a></h3><p class="short">OpenAI 協助 AMD 利用 AI 技術改良旗艦 GPU 電路設計。</p><p class="long">AMD 與 OpenAI 合作，利用 AI 改良旗艦 GPU 電路設計。部分修改已應用於新款設計中，其他則預計用於未來量產的版本。</p><p class="kws"><span class="kw is-hot">OpenAI</span><span class="kw">AMD</span><span class="kw">GPU</span><span class="kw">電路設計</span></p></article></div></section><section class="cat" id="cat-3"><h2>資安 <small>5 則</small></h2><div class="grid"><article><p class="src">iThome<time>11/19 11:11</time></p><h3><a href="https://www.ithome.com.tw/news/180642" target="_blank" rel="noopener noreferrer">美國NSA高機密通訊網路NSANet傳中斷，官方稱例行維護期間發生異常 </a></h3><p class="short">美國 NSA 內部機密網路中斷，官方稱維護異常所致。</p><p class="long">美國國家安全局內部通訊網路 NSANet 發生異常，影響員工存取機密資訊。故障期間，官方調整總部員工到班時間以減輕網路負載。</p><p class="kws"><span class="kw">NSA</span><span class="kw">NSANet</span><span class="kw">通訊網路</span><span class="kw">機密情報</span></p></article><article><p class="src">科技新報<time>11/19 11:11</time></p><h3><a href="https://infosecu.technews.tw/2026/11/19/hsbc-data-leak-hack/" target="_blank" rel="noopener noreferrer">滙豐台灣私人銀行客戶資料疑外洩？網傳逾萬筆個資遭公開兜售</a></h3><p class="short">網傳滙豐台灣私人銀行逾萬筆客戶個資遭外洩兜售。</p><p class="long">市場傳出滙豐銀行台灣私人銀行及財富管理客戶資料疑遭外洩。網路論壇出現使用者公開兜售逾萬筆個資的消息，引發關注。</p><p class="kws"><span class="kw">滙豐銀行</span><span class="kw">HSBC</span><span class="kw">台灣</span><span class="kw is-hot">個資外洩</span></p></article><article><p class="src">iThome<time>11/19 11:11</time></p><h3><a href="https://www.ithome.com.tw/news/180643" target="_blank" rel="noopener noreferrer">N0n勒索軟體組織宣稱取得Visa、摩根大通等59家公司資料</a></h3><p class="short">N0n 勒索組織宣稱竊取 Visa 等 59 家企業資料並要求談判。</p><p class="long">勒索軟體組織 N0n 宣稱取得包括 Visa、摩根大通在內的 59 家公司資料。該組織威脅受害者若不在 48 小時內談判，將公開其內部資訊。</p><p class="kws"><span class="kw">N0n</span><span class="kw">勒索軟體</span><span class="kw">Visa</span><span class="kw">摩根大通</span></p></article><article><p class="src">iThome<time>11/19 11:11</time></p><h3><a href="https://www.ithome.com.tw/news/180640" target="_blank" rel="noopener noreferrer">JINS、三菱UFJ銀行等數十家日本企業陸續發布資安事件公告，皆因第三方行銷科技業者PLAID旗下KARTE平臺遭駭</a></h3><p class="short">日本多家企業因第三方行銷平臺遭駭，導致客戶個資外洩。</p><p class="long">日本行銷科技業者 PLAID 旗下的 KARTE 平臺遭駭，波及數十家企業。受影響者包括 JINS 與三菱 UFJ 銀行，多家企業已公告個資外洩情況。</p><p class="kws"><span class="kw is-hot">JINS</span><span class="kw">三菱UFJ銀行</span><span class="kw">PLAID</span><span class="kw">KARTE</span></p></article><article><p class="src">科技新報<time>11/19 10:30</time></p><h3><a href="https://infosecu.technews.tw/2026/11/19/palmer-luckey-warns-ai-cybersecurity-defense-alert/" target="_blank" rel="noopener noreferrer">AI 助長駭客攻擊速度，Anduril 創辦人示警：舊防禦已難招架，是時候拔腿狂奔了</a></h3><p class="short">Anduril 創辦人警示 AI 提升攻擊速度，傳統防禦已難以招架。</p><p class="long">國防科技公司 Anduril 創辦人帕爾默·拉奇對 AI 助長駭客攻擊發出警告。他認為現有防禦系統已無法跟上攻擊速度，呼籲必須加速安全技術開發。</p><p class="kws"><span class="kw">Anduril</span><span class="kw">帕爾默·拉奇</span><span class="kw">駭客攻擊</span><span class="kw">資安防禦</span></p></article></div></section><section class="cat" id="cat-4"><h2>雲端與企業 IT <small>1 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 11:40</time></p><h3><a href="https://infosecu.technews.tw/2026/11/19/whats-behind-the-wave-of-outages-cybersecurity-expert-explains/" target="_blank" rel="noopener noreferrer">美國一週內接連大當機，官方稱系統升級與維護失誤是主因</a></h3><p class="short">美國多項科技服務當機，主因為系統升級與維護失誤。</p><p class="long">美國近期發生多起重大科技服務中斷，影響範圍涵蓋電子信箱、航空與網銀。官方說明系統升級與維護失誤是主因，引發對數位基礎設施脆弱性的擔憂。</p><p class="kws"><span class="kw is-hot">當機</span><span class="kw">系統升級</span><span class="kw">數位基礎設施</span><span class="kw">維護失誤</span></p></article></div></section><section class="cat" id="cat-5"><h2>產業與市場 <small>4 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 11:30</time></p><h3><a href="https://finance.technews.tw/2026/11/19/bill-ackman-slams-nvidia-board-of-directors/" target="_blank" rel="noopener noreferrer">輝達代理 CEO 試圖穩軍心股價仍跌  艾克曼轟董事會</a></h3><p class="short">輝達代理執行長試圖安撫員工，但股價持續下跌遭外界批評。</p><p class="long">輝達代理執行長 Colette Kress 召開會議穩定員工士氣。創辦人黃仁勳不在場期間，股價仍跌，遭艾克曼砲轟董事會。</p><p class="kws"><span class="kw is-hot">輝達</span><span class="kw">Nvidia</span><span class="kw">Colette Kress</span><span class="kw is-hot">黃仁勳</span></p></article><article><p class="src">INSIDE<time>11/19 11:24</time></p><h3><a href="https://www.inside.com.tw/article/42956-anthropic-ipo-83-per-share-81-billion-record" target="_blank" rel="noopener noreferrer">813 億美元寫下 IPO 新紀錄，Anthropic 每股 83 美元定價衝破區間上緣、規模超越 SpaceX</a></h3><p class="short">Anthropic 以 813 億美元募資規模刷新 IPO 紀錄。</p><p class="long">Anthropic IPO 定價每股 83 美元，募得 813 億美元。此規模超越 SpaceX 的 750 億美元，寫下新的 IPO 紀錄。</p><p class="kws"><span class="kw is-hot">Anthropic</span><span class="kw">IPO</span><span class="kw">SpaceX</span><span class="kw">每股 83 美元</span></p></article><article><p class="src">科技新報<time>11/19 10:44</time></p><h3><a href="https://finance.technews.tw/2026/11/19/anthropic-priced-its-ipo-at-83-per-share/" target="_blank" rel="noopener noreferrer">Anthropic IPO 定價超出預期，募資規模將超越 SpaceX</a></h3><p class="short">Anthropic IPO 定價 83 美元，規模預計超越 SpaceX。</p><p class="long">Anthropic 將 IPO 定價定為每股 83 美元，高於原先預期。這家開發 Claude 模型的新創公司募資規模有望超越 SpaceX。</p><p class="kws"><span class="kw is-hot">Anthropic</span><span class="kw">IPO</span><span class="kw">每股 83 美元</span><span class="kw">SpaceX</span></p></article><article><p class="src">科技新報<time>11/19 10:40</time></p><h3><a href="https://technews.tw/2026/11/19/taiwan-major-it-firms-see-revenue-surge-50/" target="_blank" rel="noopener noreferrer">AI 旺  台灣主要 IT 廠營收暴增 5 成、首破 3 兆、創史高</a></h3><p class="short">受惠 AI 需求，台灣主要 IT 廠 10 月營收破 3 兆創歷史新高。</p><p class="long">台灣主要 IT 廠 10 月營收因 AI 伺服器需求大增 5 成，首次突破 3 兆元大關。營收規模寫下歷史新高，並達成連續 32 個月增長的紀錄。</p><p class="kws"><span class="kw">台灣 IT 廠</span><span class="kw">AI 伺服器</span><span class="kw">營收</span><span class="kw">3 兆</span></p></article></div></section><section class="cat" id="cat-6"><h2>政策與社會 <small>2 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 11:01</time></p><h3><a href="https://technews.tw/2026/11/19/alberta-tightens-ai-data-center-development-land-water-power/" target="_blank" rel="noopener noreferrer">蓋 AI 資料中心，土地、水電怎麼找？加拿大亞伯達省擬加嚴開發條件</a></h3><p class="short">加拿大亞伯達省擬加嚴 AI 資料中心開發條件以應對資源難題。</p><p class="long">因應 AI 資料中心加速興建，加拿大亞伯達省於 18 日提出法案擬加嚴開發條件。此舉主要針對開發商在尋找土地、接電與用水方面所面臨的難題。</p><p class="kws"><span class="kw">AI 資料中心</span><span class="kw">亞伯達省</span><span class="kw">開發條件</span><span class="kw">水電</span></p></article><article><p class="src">科技新報<time>11/19 10:50</time></p><h3><a href="https://infosecu.technews.tw/2026/11/19/major-ai-platforms-generated-terrorist-attack-plans-during-independent-government-audit/" target="_blank" rel="noopener noreferrer">美國 GAO 祕密測試 ChatGPT、Claude 等四大 AI，不到 12 小時就做出恐攻計畫</a></h3><p class="short">美國 GAO 測試發現主流 AI 僅需不到 12 小時即可產出恐攻計畫。</p><p class="long">美國政府課責署測試 ChatGPT 與 Claude 等 AI 模型。報告指出，調查員假扮使用者可在不到 12 小時內讓 AI 產出恐怖攻擊計畫。</p><p class="kws"><span class="kw">GAO</span><span class="kw">ChatGPT</span><span class="kw is-hot">Claude</span><span class="kw">恐攻計畫</span></p></article></div></section><section class="cat" id="cat-7"><h2>其他 <small>2 則</small></h2><div class="grid"><article><p class="src">科技新報<time>11/19 11:17</time></p><h3><a href="https://technews.tw/2026/11/19/autonomous-driving-next-level-challenging/" target="_blank" rel="noopener noreferrer">Waymo 高速公路事件，映射自動駕駛技術三大考驗</a></h3><p class="short">Waymo 遭禁行高速公路，突顯自駕技術面臨的三大挑戰。</p><p class="long">Waymo 被加州政府禁止於高速公路行駛，暴露出自動駕駛的技術難關。其中包括訓練資料不足、備援機制缺失以及場域界定等三大考驗。</p><p class="kws"><span class="kw">Waymo</span><span class="kw">自動駕駛</span><span class="kw">高速公路</span><span class="kw">加州政府</span></p></article><article><p class="src">科技新報<time>11/19 11:10</time></p><h3><a href="https://technews.tw/2026/11/19/disney-partners-aws-build-ai-robots/" target="_blank" rel="noopener noreferrer">迪士尼攜手 AWS 發表全新 AI 機器人，《星際大戰》安澤蘭人顛覆傳統互動體驗</a></h3><p class="short">迪士尼與 AWS 合作推出基於《星際大戰》的 AI 機器人。</p><p class="long">迪士尼幻想工程團隊與 AWS 共同發表最新 AI 機器人合作成果。該機器人以《星際大戰》安澤蘭人為原型，旨在提供全新的互動體驗。</p><p class="kws"><span class="kw">迪士尼</span><span class="kw">AWS</span><span class="kw">AI 機器人</span><span class="kw">星際大戰</span></p></article></div></section>
+</main>
+<footer><div class="wrap">這份日報每天早上由我自己做的 n8n 流程自動產生</div></footer>
+</body>
+</html>
